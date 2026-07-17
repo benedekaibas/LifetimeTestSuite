@@ -44,3 +44,10 @@ void placement_new() {
   T *p2 = new (buffer) T{2};
   int x = p2->x;
 }
+
+int placenement_new_err() {
+  alignas(T) unsigned char buffer[sizeof(T)];
+  T *p = new (buffer) T{1};
+  p->~T();
+  return p->x;
+}
