@@ -10,6 +10,14 @@ S whole_struct_return_lazycompoundval() {
   return makeView(local); // Error here
 }
 
+/*
+The `whole_struct_return_lazyCompoundVal` and the `getFieldPtr` cases are identical. The difference is that
+the return type is different: S and an int pointer. 
+A pointer return is a &SymRegion{conj_$6{int *, LC1, S2503, #1}}. `SVal.getAsRegion()` succeeds on it. 
+The problem is that an aggregate value is nonloc::LazyCompoundVal and neither getAsRegion() nor getAsSymbol()
+covers it.
+*/
+
 // Field/member subobjects (FieldRiegon)
 struct Pair {
   int a;
