@@ -25,5 +25,6 @@ const int *array_ref_param_dangling() {
 }
 
 /*
-Currently the checker does not emit report for any of the ArrayRef test cases.
+The root cause while the checker stays silent is that getAsRegion() in checkPostCall return null for
+by-value aggregate arguments.
 */
