@@ -24,7 +24,16 @@ const int *array_ref_param_dangling() {
   return getFirstElement(local);
 }
 
+void s() {
+  int *ptr = nullptr;
+  {
+    int i = 5;
+    ptr = &i;
+  }
+  *ptr = 6;
+}
+
 /*
-The root cause while the checker stays silent is that getAsRegion() in checkPostCall return null for
-by-value aggregate arguments.
+The root cause while the checker stays silent is that getAsRegion() in
+checkPostCall return null for by-value aggregate arguments.
 */
